@@ -213,14 +213,15 @@ async def create_final_dubbed_video(data: Dict[str, Any]):
         print("No background music specified or 'none' was selected")
     
     # Export combined audio - make sure path is absolute
-    combined_audio_path = os.path.join(base_dir, f"temp/combined_audio_{upload_id}.wav")
+    combined_audio_path = os.path.join(base_dir, f"temp/combined_audio_{upload_id}.ogg")
     print(f"Exporting combined audio to: {combined_audio_path}")
     
     # Ensure the directory exists
     os.makedirs(os.path.dirname(combined_audio_path), exist_ok=True)
     
     try:
-        silent_audio.export(combined_audio_path, format="wav")
+        # Change format to ogg
+        silent_audio.export(combined_audio_path, format="ogg")
     except Exception as e:
         print(f"Error exporting combined audio: {e}")
         return {"error": "Failed to export combined audio", "details": str(e)}
