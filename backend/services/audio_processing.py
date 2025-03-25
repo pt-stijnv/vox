@@ -93,9 +93,7 @@ def extract_audio_from_video(video_path, audio_path):
     
     try:
         video_clip = VideoFileClip(video_path)
-        # Change format to ogg and specify codec
-        video_clip.audio.write_audiofile(audio_path, codec='libvorbis')
-        video_clip.close()
+        video_clip.audio.write_audiofile(audio_path)
         return audio_path
     except Exception as e:
         print(f"Error extracting audio: {e}")
