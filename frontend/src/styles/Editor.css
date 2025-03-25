@@ -1,0 +1,422 @@
+/* Editor Styles */
+.editor-container {
+  display: flex;
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  box-shadow: var(--shadow);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.editor-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.editor-title {
+  color: var(--text-primary);
+  margin-top: 0;
+  text-align: left;
+  margin-bottom: 0;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.editor-content-area {
+  display: flex;
+  gap: 30px;
+  height: 650px;
+  margin-top: 20px;
+}
+
+.editor-text-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--card-bg-hover);
+}
+
+.editor-text-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editor-text-area::-webkit-scrollbar-track {
+  background: var(--card-bg-hover);
+  border-radius: 10px;
+}
+
+.editor-text-area::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+.editor-video-area {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.editor-video-area video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.segment {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--card-bg-hover);
+  display: grid; /* Use Grid Layout */
+  grid-template-columns: auto 1fr 1fr; /* First column for time (auto width), then 2 columns for text */
+  grid-template-rows: auto auto 1fr; /* THREE ROWS: Time, Spacer, Text Content */
+  row-gap: 10px; /* Reduced row gap */
+  column-gap: 20px; /* Column gap */
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+  padding-top: 15px; /* Slightly reduced top padding */
+}
+
+.segment:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Style for editable time inputs container - positioned in its own row */
+.segment-time-edit {
+    grid-column: 1 / span 3; /* SPAN ALL THREE COLUMNS to center time inputs */
+    grid-row: 1 / span 1;    /* In the first row */
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px; /* Reduced margin below time inputs */
+    color: var(--text-tertiary);
+    font-size: 0.9em;
+    align-items: center; /* Vertically align time inputs */
+    justify-content: center; /* CENTER the time inputs horizontally */
+    transform: translateY(0); /* Reset vertical transform */
+}
+
+/* Style for individual time input fields */
+.time-input {
+    background-color: transparent;
+    color: var(--text-tertiary);
+    border: none;
+    border-bottom: 1px solid var(--border-color); /* Underline style */
+    padding: 5px 0;
+    font-size: 0.9em;
+    width: 80px; /* Adjust width as needed */
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.time-input:focus {
+    outline: none;
+    border-bottom-color: var(--primary-color); /* Highlight on focus */
+    color: var(--text-primary);
+}
+
+/* Style for text columns container - positioned in the third row */
+.segment-text-columns {
+    grid-column: 1 / span 3; /* SPAN ALL THREE COLUMNS for text content */
+    grid-row: 3 / span 1;    /* NOW IN THE THIRD ROW */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns for text */
+    gap: 20px;
+}
+
+.segment-original-text,
+.segment-translated-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.segment p {
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.segment textarea {
+  width: 100%;
+  min-height: auto; /* height: auto; to allow dynamic height */
+  height: auto;     /* height: auto; to ensure it overrides any other height settings */
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: rgba(30, 30, 30, 0.6);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  resize: vertical;
+  transition: all 0.3s ease;
+  margin-top: 0; /* Removed top margin for textareas */
+  box-sizing: border-box;
+  overflow: hidden; /* overflow: hidden; to prevent scrollbars */
+  overflow-y: hidden; /* overflow-y: hidden; to specifically hide vertical scrollbar */
+}
+
+.segment textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+}
+
+.editor-button-container {
+  text-align: right;
+  margin-top: 30px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+.editor-button-container button.translate-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 30px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(58, 134, 255, 0.3);
+}
+
+.editor-button-container button.translate-button:hover {
+  background-color: var(--primary-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(58, 134, 255, 0.4);
+}
+
+/* Download Button Style */
+.download-button {
+  background-color: var(--success-color) !important;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3) !important;
+}
+
+.download-button:hover {
+  background-color: #388e3c !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4) !important;
+}
+
+/* Video Placeholder */
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-secondary);
+  background-color: var(--card-bg-hover);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Dubbing Progress Container */
+.dubbing-progress-container {
+  width: 90%;
+  max-width: 450px;
+  padding: 25px;
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+/* Voice Selector Styles */
+.voice-selector-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--card-bg-hover);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.voice-selector-container label {
+  font-weight: 500;
+  margin-right: 15px;
+  color: var(--text-primary);
+}
+
+.voice-select {
+  appearance: none;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 15px;
+  padding-right: 40px;
+  font-size: 1em;
+  min-width: 250px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+}
+
+.voice-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+}
+
+.voice-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Terminology Indicator in Editor */
+.terminology-indicator {
+  display: flex;
+  align-items: center;
+  background-color: rgba(58, 134, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 15px;
+}
+
+.terminology-indicator:hover {
+  background-color: rgba(58, 134, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.terminology-indicator-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  fill: var(--primary-color);
+}
+
+/* Terminology Info Panel */
+.terminology-info-panel {
+  background-color: var(--card-bg-hover);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  animation: slideDown 0.3s ease;
+  border-left: 3px solid var(--primary-color);
+}
+
+.terminology-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: rgba(58, 134, 255, 0.1);
+}
+
+.terminology-info-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: var(--primary-color);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.terminology-info-content {
+  padding: 15px 20px;
+}
+
+.terminology-coverage {
+  margin-top: 15px;
+}
+
+.terminology-coverage h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 0.95em;
+  color: var(--text-primary);
+}
+
+.terminology-coverage ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.terminology-coverage li {
+  background-color: rgba(58, 134, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+.language-pair {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+  .segment {
+    grid-template-columns: 1fr; /* Revert to single column layout on smaller screens */
+    padding-top: 30px; /* Adjust top padding for stacked layout */
+  }
+
+  .segment-text-columns {
+    grid-column: 1 / span 1; /* Reset column span */
+    grid-row: 2 / span 1;    /* Now in the second row for stacked layout */
+    grid-template-columns: 1fr; /* Stack text columns on smaller screens */
+  }
+
+  .segment-time-edit {
+    grid-column: 1 / span 1; /* Reset column span */
+    justify-content: flex-start; /* Revert to left align for stacked layout */
+    margin-bottom: 0; /* Reset margin */
+  }
+  
+  .terminology-info-panel {
+    max-width: 100%;
+  }
+  
+  .terminology-coverage ul {
+    grid-template-columns: 1fr;
+  }
+}

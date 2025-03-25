@@ -1,0 +1,98 @@
+# Complete Restructured Application
+
+## Backend Structure
+
+```
+backend/
+├── main.py                      # FastAPI application entry point
+├── config.py                    # Configuration for API keys, directories
+├── requirements.txt             # Project dependencies
+├── routes/
+│   ├── __init__.py              # Package initialization
+│   ├── upload.py                # Video upload endpoints
+│   ├── dubbing.py               # Video dubbing endpoints
+│   ├── glossary.py              # Terminology endpoints
+│   └── music.py                 # Music preview endpoints
+├── services/
+│   ├── __init__.py              # Package initialization
+│   ├── transcription.py         # Audio transcription (OpenAI Whisper)
+│   ├── translation.py           # Text translation (GPT-4)
+│   ├── speech.py                # Text-to-speech (Azure)
+│   ├── audio_processing.py      # Audio manipulation, background music
+│   ├── video_processing.py      # Video processing functions
+│   └── glossary_service.py      # Glossary processing logic
+├── models/
+│   ├── __init__.py              # Package initialization
+│   ├── glossary.py              # Glossary data models
+│   └── request_models.py        # Request/response models
+└── utils/
+    ├── __init__.py              # Package initialization
+    ├── file_utils.py            # File handling utilities
+    └── voice_mapping.py         # Language to voice mappings
+```
+
+## Frontend Structure
+
+```
+frontend/
+├── public/
+│   ├── index.html               # HTML entry point
+│   └── ...                      # Other public assets
+├── src/
+│   ├── index.js                 # React application entry point
+│   ├── App.js                   # Main App component
+│   ├── styles/
+│   │   ├── index.css            # Base and imported styles
+│   │   ├── Upload.css           # Upload component styles
+│   │   ├── Editor.css           # Editor component styles
+│   │   └── Music.css            # Music components styles
+│   ├── components/
+│   │   ├── upload/
+│   │   │   ├── Upload.js              # Main upload component
+│   │   │   ├── GlossaryUpload.js      # Glossary upload component
+│   │   │   └── UploadIcon.js          # Upload icon component
+│   │   ├── editor/
+│   │   │   ├── TextEditor.js          # Main editor component
+│   │   │   ├── Segment.js             # Individual segment component
+│   │   │   ├── VoiceSelector.js       # Voice selector component
+│   │   │   └── TerminologyPanel.js    # Terminology information panel
+│   │   ├── music/
+│   │   │   ├── MusicSelector.js       # Music selection component
+│   │   │   └── MusicPreview.js        # Music preview modal
+│   │   └── common/
+│   │       ├── InfoIcon.js            # Info icon with tooltip
+│   │       └── ProgressBar.js         # Progress bar component
+│   └── utils/
+│       ├── api.js                    # API call functions
+│       ├── formatters.js             # Time formatting functions
+│       └── constants.js              # Voice options, languages, etc.
+└── package.json                      # Frontend dependencies
+```
+
+I've completed all the necessary files for the restructured application. The restructuring maintains all the original functionality while organizing the code in a more maintainable way.
+
+## Key Benefits
+
+1. **Separation of Concerns**: Each component, service, and utility has a single responsibility
+2. **Modularity**: Code is broken down into logical, manageable pieces
+3. **Reusability**: Common functions are extracted into utilities
+4. **Maintainability**: Smaller files are easier to update and debug
+5. **Scalability**: The structure allows for easy addition of new features
+
+For testing the restructured application, start both the backend and frontend servers:
+
+1. Start the backend:
+```
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+2. Start the frontend:
+```
+cd frontend
+npm install
+npm start
+```
+
+The application should work exactly as before, but with a much cleaner code organization.
