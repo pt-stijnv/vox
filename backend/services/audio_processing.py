@@ -89,7 +89,7 @@ def extract_audio_from_video(video_path, audio_path):
     Returns:
         Path to the extracted audio file
     """
-    from moviepy import VideoFileClip
+    from moviepy.editor import VideoFileClip
     
     try:
         video_clip = VideoFileClip(video_path)
